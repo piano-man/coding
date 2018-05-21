@@ -1,4 +1,4 @@
-//longest increasing sub sequence
+//maximum sum increasing sub sequence
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
@@ -7,16 +7,22 @@ int lis(int *arr,int n)
 {
     int i, j;
     int arr1[n];
+    int sum[n];
     for(i=0;i<n;i++)
     {
         arr1[i]=1;
+    }
+    for(i=0;i<n;i++)
+    {
+        sum[i]=arr[i];
     }
     for(i=1;i<n;i++)
     {
         for(j=0;j<i;j++)
         {
             if(arr[i]>arr[j])
-            {
+            {   
+                sum[i]=sum[j]+arr[i];
                 arr1[i]=arr1[j]+1;
             }
         }
@@ -24,9 +30,9 @@ int lis(int *arr,int n)
     int max = INT_MIN;
     for(i=0;i<n;i++)
     {
-        if(arr1[i]>=max)
+        if(sum[i]>=max)
         {
-            max = arr1[i];
+            max = sum[i];
         }
     }
     return max;

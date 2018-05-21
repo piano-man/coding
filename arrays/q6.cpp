@@ -1,85 +1,57 @@
-//kth smallest element(linear time)
-//error
-#include <iostream>
-#include <vector>
-#include <climits>
-#include <string>
-#include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
 
-void swap(int* a,int* b)
+void swap(int *a,int *b)
 {
-    int t = *a;
-    *a=*b;
-    *b=t;
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
 }
-int partition(vector<int> v,int start,int end)
+
+int partition(int *arr,int low,int high)
 {
-    int pivot;
-    pivot = v[end];
-    int i = start-1;
+    int pivot = arr[high];
+    int i = low-1;
     int j;
-    for(j=start;j<=end-1;j++)
+    for(j=low;j<=high-1;j++)
     {
-        if(v[j]<pivot)
+        if(arr[j]<=pivot)
         {
             i++;
-            swap(&v[j],&v[i]);
+            swap(&arr[i],&arr[j]);
         }
     }
-    swap(&v[i+1],&v[end]);
-    return (i+1);
+    swap(&arr[i+1],&arr[high]);
+    return i+1;
 }
 
-int kthsmallest(vector<int> v , int start,int end,int k)
+int quicksort(int *arr,int low,int high,int k)
 {
-    if(k>0&&k<=end-start+1)
+    if(low<high)
     {
-        int pi = partition(v,start,end);
-        if(pi-start==k-1)
+        int pi = partition(arr,low,high);
+        if(pi==k-1)
         {
-            cout << v[pi];
-            return 0;
+            return arr[pi];
         }
-        else if(pi-start>=k)
+        if(pi>k-1)
         {
-            return kthsmallest(v,start,pi-1,k);
+        return quicksort(arr,low,pi-1,k);
         }
-        else
-        {
-            return kthsmallest(v,pi+1,end,k);
-        }
+        return quicksort(arr,pi,high,k);
+
+
     }
 
+return INT_MAX;
 }
-
 int main()
 {
-    vector<vector<int> >v;
-    int size[200];
-    int karr[200];
-    int cases;
-    cin >> cases;
-    int i;
-    for (i = 0; i < cases; i++)
-    {
-        v.push_back(vector<int>());
-    }
-    for(i=0;i<cases;i++)
-    {
-        cin >> size[i];
-        int j;
-        for(j=0;j<size[i];j++)
-        {
-            int n;
-            cin >> n;
-            v[i].push_back(n);
-        }
-        cin >> karr[i];
-    }
-    for(i=0;i<cases;i++)
-    {
-        kthsmallest(v[i],0,size[i]-1,karr[i]);
-    }
-
+    int arr[] = {7, 10, 4, 3, 20, 15};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    int k;
+    cin >> k;
+    int ans = quicksort(arr,0,n-1,k);
+    cout << ans;
 }
