@@ -1,6 +1,7 @@
-//maximum path(leaf to leaf)
+//maximum path sum(any node to any node)
 #include<iostream>
 #include<bits/stdc++.h>
+#include<algorithm>
 
 using namespace std;
 
@@ -26,63 +27,30 @@ struct node* createTree()
     return newnode;
 } 
 
-void printtree(struct node *root)
-{
-    if(root==NULL)
-    {
-        return;
-    }
-    cout << root->value <<"  ";
-    printtree(root->left);
-    printtree(root->right);    
-}
-
-
-int max(int l1,int l2)
-{
-    if(l1>l2)
-    {
-        return l1;
-    }
-    else
-    {
-        return l2;
-    }
-}
-
 int maxsumutil(struct node *root,int &res)
 {
     if(root==NULL)
     {
         return 0;
     }
-    if(root->left==NULL&&root->right==NULL)
+    if(root->left==NULL && root->right==NULL)
     {
         return root->value;
     }
 
-    int ls=maxsumutil(root->left,res);
-    int rs=maxsumutil(root->right,res);
+    int ls = maxsumutil(root->left,res);
+    int rs = maxsumutil(root->right,res);
 
-    if(root->left&&root->right)
-    {
-        int temp = ls+rs+root->value;
-        if(temp>res)
-        {
-            res = temp;
-        }
-        return max(ls+root->value,rs+root->value);
-    }
-    if(!root->left)
-    {
-        return rs+root->value;
-    }
-    if(!root->right)
-    {
-        return ls+root->value;
-    }
+    int temp = ls+rs+root->value;
 
-    
+    int lfs,rfs;
+    lfs = (ls+root->value<ls)?ls:ls+root->value;
+    rfs = (rs+root->value<rs)?rs:rs+root->value;
+
+    int a1 = max(res,lfs);
+    int a2 = max(a1,rfs);
+    res = max(a2,ls+rs+root->value);
+    return max(rs+root->value,ls+root->value);
 }
 
 int maxsumpath(struct node *root)
@@ -95,7 +63,6 @@ int maxsumpath(struct node *root)
 int main()
 {
     struct node *root = createTree();
-    //printtree();
     int ans = maxsumpath(root);
     cout << ans;
 }
