@@ -5,8 +5,23 @@
 #include<vector>
 using namespace std;
 
-subset_gen(vector<vector<int> > &sset,vector<int> set)
+map<int,int> m;
+subset_gen(vector<int> set,int start,int end)
 {
+    if(start==end)
+    {
+        int i;
+        for(i=0;i<n;i++)
+        {
+            cout << v[i] << " ";
+        }
+        cout << "\n";
+    }
+    int count = 0;
+    while(count<=end)
+    {
+        
+    }
 
 }
 int main()
@@ -19,8 +34,9 @@ int main()
     {
         int val;
         cin >> val;
+        m[val]++;
         set.push_back(val);
     }
-    vector<vector<int> > sset;
-    subset_gen(sset,set);
+    //vector<vector<int> > sset;
+    subset_gen(set,0,n);
 }
