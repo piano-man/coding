@@ -13,7 +13,7 @@ void orderreverse(string s)
         v.push_back(s[i]);
     }
     //cout << v[0];
-    deque<char> dq;
+    list<char> dq;
     for(i=0;i<=n;i++)
     {
         if(i!=n)

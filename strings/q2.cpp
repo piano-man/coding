@@ -46,9 +46,10 @@ void printLCS(vector<string> v,int l1,int l2)
     }
     else
     {
+        int l2 = len;
         cout << len;
         cout << "\n";
-        char* result = (char*)malloc((len + 1) * sizeof(char));
+        char* result = (char*)malloc((len ) * sizeof(char));
         int k=0;
         while(row!=0 && col!=0)
         {
@@ -64,7 +65,11 @@ void printLCS(vector<string> v,int l1,int l2)
                 }
 
         }
-        cout << result;       
+        int i;
+        for(i=0;i<l2;i++)
+        {
+            cout << result[i];
+        }      
     }
 
 }

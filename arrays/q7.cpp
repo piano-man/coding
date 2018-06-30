@@ -15,7 +15,7 @@ int lis(int *arr,int n)
     {
         for(j=0;j<i;j++)
         {
-            if(arr[i]>arr[j])
+            if(arr[i]>arr[j]&&arr1[i]<arr1[j]+1)
             {
                 arr1[i]=arr1[j]+1;
             }
@@ -34,7 +34,7 @@ int lis(int *arr,int n)
 
 int main()
 {
-    int arr[] = {1,101,2,3,100,4,5};
+    int arr[] = { 10, 22, 9, 33, 21, 50, 41, 60 };
     int n = sizeof(arr)/sizeof(arr[0]);
     int len = lis(arr,n);
     cout << len;

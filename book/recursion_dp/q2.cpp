@@ -1,32 +1,35 @@
-//subsets of a set(doubt)
-#include<iostream>
-#include<stdlib.h>
-#include<stdio.h>
-#include<vector>
+//subsets of a set
+#include<bits/stdc++.h>
 using namespace std;
 
-map<int,int> m;
-subset_gen(vector<int> set,int start,int end)
+unordered_map<int, int> m;
+void subset_gen(vector<int> v,int start,int end,unordered_map<int, int> m)
 {
     if(start==end)
     {
         int i;
-        for(i=0;i<n;i++)
+        for(i=0;i<end;i++)
         {
             cout << v[i] << " ";
         }
         cout << "\n";
     }
-    int count = 0;
-    while(count<=end)
+    unordered_map<int, int>::iterator it;
+    for(it=m.begin();it!=m.end();it++)
     {
-        
+        if(it->second!=0)
+        {
+            it->second = it->second-1;
+            v.insert(v.begin()+start,it->first);
+            subset_gen(v,start+1,end,m);
+            it->second = it->second+1;
+        }
     }
 
 }
 int main()
 {
-    vector<int> set;
+    vector<int> v;
     int n;
     cin >> n;
     int i;
@@ -35,8 +38,7 @@ int main()
         int val;
         cin >> val;
         m[val]++;
-        set.push_back(val);
     }
     //vector<vector<int> > sset;
-    subset_gen(set,0,n);
+    subset_gen(v,0,n,m);
 }
