@@ -1,4 +1,4 @@
-//subsets of a set
+//permutations of a set
 #include<bits/stdc++.h>
 using namespace std;
 
