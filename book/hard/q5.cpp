@@ -46,7 +46,7 @@ bool search(string key,struct trienode *root)
     for(i=0;i<n;i++)
     {
         int index = key[i]-'a';
-        if(!temp->children[i])
+        if(!temp->children[index])
         {
             return false;
         }
