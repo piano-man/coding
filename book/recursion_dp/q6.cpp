@@ -1,5 +1,4 @@
 //subsets of a set
-//can't find the error
 #include<bits/stdc++.h>
 using namespace std;
 
