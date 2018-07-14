@@ -1,15 +1,14 @@
 //subset sum problem
 //dynamic programming solution
+//subset sum problem
+//dynamic programming solution
 #include<bits/stdc++.h>
 using namespace std;
 
-void divide(vector<int> v)
+void divide(vector<int> v,int n)
 {
-    int n = v.size();
-    int i,j;
     int sum = 0;
-    int table[n][n];
-    memset(table,0,sizeof(table));
+    int  i,j;
     for(i=0;i<n;i++)
     {
         sum+=v[i];
@@ -19,28 +18,39 @@ void divide(vector<int> v)
         cout << "NO";
         return;
     }
-    for(i=0;i<n;i++)
+    sum = sum/2;
+    bool table[n+1][sum+1];
+    for(i=0;i<=n;i++)
     {
-        table[i][i] = v[i];
-        if(table[i][i]==sum/2)
-        {
-            cout << "YES";
-            return;
-        }
+        table[i][0]=true;
     }
-    for(i=0;i<n-1;i++)
+    for(i=0;i<=sum;i++)
     {
-        for(j=i+1;j<n;j++)
+        table[0][i]=false;
+    }
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=sum;j++)
         {
-            table[i][j] = table[i][j-1]+v[j];
-            if(table[i][j]==sum/2)
+            if(j<v[i-1])
             {
-                cout << "YES";
-                break;
+                table[i][j] = table[i-1][j];    
             }
+            else if(j>=v[i-1])
+            {
+                table[i][j] = table[i-1][j] || table[i-1][j-v[i-1]];
+            }
+            
         }
     }
-
+    if(table[n][sum]==true)
+    {
+        cout << "YES";
+    }
+    else
+    {
+        cout << "NO";
+    }
 }
 
 int main()
@@ -48,26 +58,20 @@ int main()
     int t;
     cin >> t;
     int i;
-    vector<vector<int> >v;
-    for(i=0;i<t;i++)
-    {
-        v.push_back(vector<int>());
-    }
     for(i=0;i<t;i++)
     {
         int n;
         cin >> n;
+        vector<int> v;
         int j;
         for(j=0;j<n;j++)
         {
             int k;
             cin >> k;
-            v[i].push_back(k);
+            v.push_back(k);
         }
-    }
-    for(i=0;i<t;i++)
-    {
-        divide(v[i]);
+        divide(v,n);
         cout << "\n";
     }
+
 }
