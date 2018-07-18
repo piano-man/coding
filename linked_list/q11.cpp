@@ -1,5 +1,4 @@
-//delete nodes with greter value on right
-
+//delete nodes with greater value on right
 #include<bits/stdc++.h>
 using namespace std;
 struct Node
