@@ -1,4 +1,4 @@
-//balanced paranthesis
+//balanced parenthesis
 #include<iostream>
 #include<stdio.h>
 #include<stdlib.h>

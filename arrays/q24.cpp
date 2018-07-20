@@ -30,7 +30,7 @@ bool findTriplets(int arr[], int n)
     {
         int sum = 0;
         j = i+1;
-        k = n-2;
+        k = n-1;
         while(j<k)
         {
             sum = arr[i]+arr[j]+arr[k];
